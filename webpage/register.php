@@ -1,7 +1,4 @@
-<?php  
-
-include('connection.php');
-
+<?php
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
@@ -10,21 +7,23 @@ include('connection.php');
 		<title>My Blog - Registration Form</title>
 		<link href="style.css" type="text/css" rel="stylesheet" />
 	</head>
-	
+
 	<body>
-		<?php include('header.php'); ?>
+
+
 
 		<h2>User Details Form</h2>
 		<h4>Please, fill below fields correctly</h4>
-		<form action="register.php" method="post">
+		<form action="includes/connection.php" method="POST">
+
 				<ul class="form">
 					<li>
 						<label for="username">Username</label>
-						<input type="text" name="username" id="username" required/>
+						<input type="text" name="username" id="username" required />
 					</li>
 					<li>
 						<label for="fullname">Full Name</label>
-						<input type="text" name="fullname" id="fullname" required/>
+						<input type="text" name="fullname" id="fullname" required />
 					</li>
 					<li>
 						<label for="email">Email</label>
@@ -39,7 +38,7 @@ include('connection.php');
 						<input type="password" name="confirm_pwd" id="confirm_pwd" required />
 					</li>
 					<li>
-						<input type="submit" value="Submit" /> &nbsp; Already registered? <a href="index.php">Login</a>
+						<input type="submit" name="register" value="Submit" /> &nbsp; Already registered? <a href="index.php">Login</a>
 					</li>
 				</ul>
 		</form>

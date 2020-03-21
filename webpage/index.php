@@ -1,15 +1,15 @@
 <?php
-include('connection.php');
+include_once 'includes/connection.php';
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
-		<title>My Personal Page</title>
+		<title>My Personal Page PHP and MySQL</title>
 		<link href="style.css" type="text/css" rel="stylesheet" />
 	</head>
-	
+
 	<body>
-		<?php include('header.php'); ?>
+
 		<!-- Show this part if user is not signed in yet -->
 		<div class="twocols">
 			<form action="index.php" method="post" class="twocols_col">
@@ -25,9 +25,22 @@ include('connection.php');
 					<li>
 						<label for="remember">Remember Me</label>
 						<input type="checkbox" name="remember" id="remember" checked />
+						<?php $remember_me = $_POST['remember'];
+                if($remember_me == 'yes' && !isset($_COOKIE['username']))
+                    {
+                        setcookie('username', $_SESSION['username'], time()+(((60*60)*24)*365));
+                    }
+                    elseif($remember_me == 'no' && !isset($_COOKIE['username']))
+                    {
+                        setcookie('username', $_SESSION['username'], 0);
+                    }
+                    else
+                    {
+                        setcookie('username', '', time()-3600);
+                    } ?>
 					</li>
 					<li>
-						<input type="submit" value="Submit" /> &nbsp; Not registered? <a href="register.php">Register</a>
+						<input type="submit" name="login_user" value="Submit" /> &nbsp; Not registered? <a href="register.php">Register</a>
 					</li>
 				</ul>
 			</form>
@@ -36,38 +49,9 @@ include('connection.php');
 				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur libero nostrum consequatur dolor. Nesciunt eos dolorem enim accusantium libero impedit ipsa perspiciatis vel dolore reiciendis ratione quam, non sequi sit! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio nobis vero ullam quae. Repellendus dolores quis tenetur enim distinctio, optio vero, cupiditate commodi eligendi similique laboriosam maxime corporis quasi labore!</p>
 			</div>
 		</div>
-		
+
 		<!-- Show this part after user signed in successfully -->
-		<div class="logout_panel"><a href="register.php">My Profile</a>&nbsp;|&nbsp;<a href="index.php?logout=1">Log Out</a></div>
-		<h2>New Post</h2>
-		<form action="index.php" method="post">
-			<ul class="form">
-				<li>
-					<label for="title">Title</label>
-					<input type="text" name="title" id="title" />
-				</li>
-				<li>
-					<label for="body">Body</label>
-					<textarea name="body" id="body" cols="30" rows="10"></textarea>
-				</li>
-				<li>
-					<input type="submit" value="Post" />
-				</li>
-			</ul>
-		</form>
-		<div class="onecol">
-			<div class="card">
-				<h2>TITLE HEADING</h2>
-				<h5>Author, Sep 2, 2017</h5>
-				<p>Some text..</p>
-				<p>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
-			</div>
-			<div class="card">
-				<h2>TITLE HEADING</h2>
-				<h5>Author, Sep 2, 2017</h5>
-				<p>Some text..</p>
-				<p>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
-			</div>
-		</div>
+
+
 	</body>
 </html>
